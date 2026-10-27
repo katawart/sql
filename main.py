@@ -21,7 +21,6 @@ class App:
         root.resizable(width=False, height=False)
 
 
-
         name_lbl=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
         name_lbl["font"] = ft

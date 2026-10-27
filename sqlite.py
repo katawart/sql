@@ -24,20 +24,23 @@ class sql_handling():
     
     #Precondition: Takes one value a query to run
     #Postcondition: Returns x number of rows from a database
-    def sql_execute_query(self, query):
+    def fetch_all(self, query):
         self.cursor.execute(query)    
         return self.cursor.fetchall()  #FetchAll = bring data from 
+
+
+    #Preconditions: Takes two values a database name and a list of values to insert into the database
+    #Postcondition: Inserts a record into the database
+    def insert_record(self, database, values):
         
-connector = sql_handling("geek.db")
-connector_two = sql_handling("geek.db")
-
-
-
-rows = connector.sql_execute_query(f"SELECT * FROM student;")
+        vals = (values[0], values[1], values[2])
+        self.cursor.execute(f"INSERT INTO student VALUES (?, ?, ?)", vals)    
+        self.my_conn.commit()    
 
 
 if __name__ == "__main__":
-    rows = connector.sql_execute_query(f"SELECT * FROM student;")
+    connector = sql_handling("geek.db")
+    rows = connector.fetch_all(f"SELECT * FROM student;")
     for row in rows:
         print(row)
         for field in row:
